@@ -1,10 +1,6 @@
-.content{
-  grid-area: c;
-  background-color: slategray;
+.wrapper{
+  width: 100%;
 }
-.content img{
-  width: 900px;
-}
-.item{
-  color: red;
+.wrapper .mainImg{
+  width: 100%;
 }
