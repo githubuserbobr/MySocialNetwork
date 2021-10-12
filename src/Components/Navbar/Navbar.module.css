@@ -1,6 +1,6 @@
 .nav{
   grid-area: n;
-  background-color: red;
+  background-color: rgb(238, 9, 20);
   padding: 20px;
   
 }
@@ -10,4 +10,27 @@
 }
 .item a.activeLink {
 color:black;
+}
+.item{
+  padding-top: 7px;
+}
+.friends{
+  display: flex;
+}
+.friend{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin:0 10px;
+}
+.friend img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  
+}
+.item.friends a{
+  margin-top: 30px;
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import Header from './Components/Header/Header';
@@ -8,20 +8,28 @@ import Profile from './Components/Profile/Profile';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
+import Friends from './Components/Friends/Friends';
 
 
-const App = () => {
+
+const App = (props) => {
   return (
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
-      <Navbar />
+      <Navbar friendsName={props.sidebar} />
        <div className='app-wraper-content'>
-          <Route path='/profile' component={Profile} />
-          <Route path='/dialogs' component={Dialogs} />
-          <Route path='/news' component={News} />
-          <Route path='/Music' component={Music} />
-          <Route path='/settings' component={Settings} />
+   <Route path='/profile'  render={() => <Profile  posts={props.postsData}  dispatch={props.dispatch} inputPost={props.inputPost} />} /> 
+          <Route path='/dialogs' render={() => <Dialogs 
+          dialogs={props.dialogsData} 
+          messages={props.messages} 
+          addMessage={props.addMessage}
+          handleInputMessage={props.handleInputMessage}
+          inputMessage={props.inputMessage} />}  />
+          <Route path='/news'render={() => <News />} />
+          <Route path='/music' render={() => <Music />} />
+          <Route path='/settings' render={() => <Settings />} />
+          <Route path='/friends' render={() => <Friends Sidebar={props.sidebar} />} />
         </div>
         
     </div>

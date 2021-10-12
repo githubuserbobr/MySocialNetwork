@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import c from './MyPosts.module.css';
 import Post from '../Post';
 
 
-const MyPosts = () => {
+
+const MyPosts = (props) => {
+  
   return (
-    <div>
+    <div className={c.postsBlock}>
+      {props.PostsData.map(posts => (<Post message={posts.message} likeCounts={posts.likeCounts} id={posts.id} />))}
       <div>
-        My posts
+        <h3> My posts </h3>
       </div>
       <div>
-        <textarea placeholder='write something'></textarea>
-        <button>Add post</button>
+        <div>
+          <input value={props.inputPost} onChange={(event) => { props.dispatch({type: 'HANDLE-INPUT-POS',event: event}) }} placeholder='write something' />
+        </div>
+        <div>
+          <button onClick={props.dispatch({type:'ADD-POST'})} >Add post</button>
+        </div>
       </div>
       <div className={c.posts}>
-        <Post message="Hi,how are you?" likeCounts="15"/>
-        <Post message="It's my first post!" likeCounts="30"/>
-        </div>
-        </div>)
+
+      </div>
+    </div>)
 };
 export default MyPosts;
