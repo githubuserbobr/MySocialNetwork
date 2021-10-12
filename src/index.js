@@ -8,13 +8,14 @@ import reportWebVitals from './reportWebVitals';
 
 
 let rerederEntireTree = (store) => {
-    debugger;
+    
     ReactDOM.render(
          <App  
-         sidebar={store.getState().ProfilePage.DialogsData} 
+         sidebar={store. getState().ProfilePage.DialogsData} 
          dialogsData={store.getState().ProfilePage.DialogsData} 
          messages={store.getState().MessagesPage.MessagesData} 
-         dispatch={store.dispatch.bind(store)} 
+         dispatch={store.dispatch.bind(store)}
+         handleInputPost={store.getState().ProfilePage.handleInputPost} 
          inputPost={store.getState().ProfilePage.inputPost}
         addMessage={store.getState().MessagesPage.addMessage}
          inputMessage={store.getState().MessagesPage.inputMessage}
@@ -25,7 +26,7 @@ let rerederEntireTree = (store) => {
         document.getElementById('root')
     );
 }
- store.getState().ProfilePage.subscribe (rerederEntireTree);
+ store.getState().ProfilePage.subscribe(rerederEntireTree);
  store.getState().ProfilePage._callSubscriber(store);
 
 

@@ -14,7 +14,7 @@ const MyPosts = (props) => {
       </div>
       <div>
         <div>
-          <input value={props.inputPost} onChange={(event) => { props.dispatch({type: 'HANDLE-INPUT-POS',event: event}) }} placeholder='write something' />
+          <input value={props.inputPost} onChange={(event) => (props.handleInputPost) } placeholder='write something' />
         </div>
         <div>
           <button onClick={props.dispatch({type:'ADD-POST'})} >Add post</button>

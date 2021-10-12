@@ -13,16 +13,16 @@ export let store = {
       subscribe  (observer)  {
         this._callSubscriber = observer;
       },
-      // AddPost()  {
-      //   let newPost = {
-      //     id: "5",
-      //     message: this._state.ProfilePage.inputPost,
-      //     likeCounts: 0
-      //   }
-      //   store._state.ProfilePage.PostsData.push(newPost);
-      //   store._state.ProfilePage.inputPost = '';
-      //   store._state.ProfilePage._callSubscriber(store);
-      // },
+        AddPost()  {
+          let newPost = {
+          id: "5",
+            message: this._state.ProfilePage.inputPost,
+            likeCounts: 0
+         }
+          store._state.ProfilePage.PostsData.push(newPost);
+          store._state.ProfilePage.inputPost = '';
+          store._state.ProfilePage._callSubscriber(store);
+        },
       handleInputPost (event)  {
         store._state.ProfilePage.inputPost = event.currentTarget.value;
         store._state.ProfilePage._callSubscriber(store);
@@ -69,24 +69,19 @@ export let store = {
         { id: "3", message: "Mozhno u tebya lentu vzyat?)))" },
       ],
     },
-    dispatch(action){
-      if (action.type === 'ADD-POST'){
-        debugger
-      let newPost = {
-        id: "5",
-        message: this._state.ProfilePage.inputPost,
-        likeCounts: 0
+       },
+      dispatch(action){
+        if (action.type === 'ADD-POST'){
+        let newPost = {
+          id: "5",
+            message: this._state.ProfilePage.inputPost,
+            likeCounts: 0
+         }
+          store._state.ProfilePage.PostsData.push(newPost);
+          store._state.ProfilePage.inputPost = '';
+          store._state.ProfilePage._callSubscriber(store);
+        }
       }
-      store._state.ProfilePage.PostsData.push(newPost);
-      store._state.ProfilePage.inputPost = '';
-      store._state.ProfilePage._callSubscriber(store);
-    }
-  else if (action.type === 'HANDLE-INPUT-POST'){
-    store._state.ProfilePage.inputPost = action.event.currentTarget.value;
-    store._state.ProfilePage._callSubscriber(store);
-   }
-     }
-       }
         }    
 
 
