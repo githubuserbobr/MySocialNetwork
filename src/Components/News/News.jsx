@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import c from './News.module.css';
 const News = (Props) => {
+    debugger
     return (
-        <div classname={c.content}>
+        <div className={c.content}>
             News
         </div>
     )

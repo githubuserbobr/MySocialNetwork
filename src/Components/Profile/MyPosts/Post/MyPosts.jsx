@@ -4,25 +4,25 @@ import Post from '../Post';
 
 
 
+
 const MyPosts = (props) => {
-  
+  debugger
   return (
     <div className={c.postsBlock}>
-      {props.PostsData.map(posts => (<Post message={posts.message} likeCounts={posts.likeCounts} id={posts.id} />))}
+      {props.postsData.map(posts => (<Post message={posts.message} likeCounts={posts.likeCounts} id={posts.id} />))}
       <div>
         <h3> My posts </h3>
       </div>
       <div>
         <div>
-          <input value={props.inputPost} onChange={(event) => (props.handleInputPost) } placeholder='write something' />
+          <input value={props.inputPost} onChange={props.newMessage} placeholder='write something' />
         </div>
         <div>
-          <button onClick={props.dispatch({type:'ADD-POST'})} >Add post</button>
+          <button onClick={props.addPost} >Add post</button>
         </div>
       </div>
-      <div className={c.posts}>
-
-      </div>
+      <div className={c.posts} />
+      
     </div>)
 };
 export default MyPosts;

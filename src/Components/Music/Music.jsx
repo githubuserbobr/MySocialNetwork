@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import c from './Music.module.css';
 const Music = (Props) => {
     return (
-        <div classname={c.content}>
+        <div className={c.content}>
             Music
         </div>
     )

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import Header from './Components/Header/Header';
-import Dialogs from './Components/Dialogs/Dialogs';
+import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Profile from './Components/Profile/Profile';
 import News from './Components/News/News';
@@ -12,26 +12,21 @@ import Friends from './Components/Friends/Friends';
 
 
 
-const App = (props) => {
+const App = ({state}) => {
+  debugger
   return (
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
-      <Navbar friendsName={props.sidebar} />
-       <div className='app-wraper-content'>
-   <Route path='/profile'  render={() => <Profile  posts={props.postsData}  dispatch={props.dispatch} inputPost={props.inputPost} />} /> 
-          <Route path='/dialogs' render={() => <Dialogs 
-          dialogs={props.dialogsData} 
-          messages={props.messages} 
-          addMessage={props.addMessage}
-          handleInputMessage={props.handleInputMessage}
-          inputMessage={props.inputMessage} />}  />
-          <Route path='/news'render={() => <News />} />
-          <Route path='/music' render={() => <Music />} />
-          <Route path='/settings' render={() => <Settings />} />
-          <Route path='/friends' render={() => <Friends Sidebar={props.sidebar} />} />
-        </div>
-        
+       <Navbar friendsName={state.sidebar.sideBarData} />
+       <div className='app-wrapper-content'>
+   <Route path='/profile'  render={() => <Profile postsData={state.profilePage.postsData} inputPost={state.profilePage.inputPost}  />} /> 
+          <Route path='/dialogs' render={() => <DialogsContainer dispatch={state.dispatch}  messages={state.messagesPage.messagesData} dialogs={state.messagesPage.dialogsData} />}  />
+          <Route path='/news' render={() => <News/>} />
+           <Route path='/music' render={() => <Music />} />
+         <Route path='/settings' render={() => <Settings />} />
+         <Route path='/friends' render={() => <Friends Sidebar={state.sidebar} />} />  
+          </div>  
     </div>
     </BrowserRouter>
     )

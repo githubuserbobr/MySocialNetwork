@@ -1,14 +1,17 @@
 import React from 'react';
 import c from './Profile.module.css';
-import MyPosts from './MyPosts/Post/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import MyPostsContainer from './MyPosts/Post/MyPostsContainer';
+
 
 const Profile = (props) => {
-  
+  debugger;
   return (
     <div className={c.wrapper}>
       <ProfileInfo />
-      <MyPosts PostsData={props.posts} dispatch={props.dispatch}  inputPost={props.inputPost} />
+      
+        <MyPostsContainer postsData={props.postsData} dispatch={props.dispatch} inputPost={props.inputPost} />
+    
     </div>)
 };
 

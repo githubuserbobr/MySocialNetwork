@@ -1,32 +1,14 @@
+import dialogsReducer from "./Reducers/dialogs-Reducer";
+import sidebarReducer from "./Reducers/sidebar-Reducer";
+import profileReducer from "./Reducers/profile-Reducer";
 
-
-export let store = {
-  getState(){
-    return this._state
-  },
+ let store = {
+  
   _state: {
-    _callSubscriber () {   
-      console.log('State changed')
-    },
+   
+   
     ProfilePage: {
       inputPost: '',
-      subscribe  (observer)  {
-        this._callSubscriber = observer;
-      },
-        AddPost()  {
-          let newPost = {
-          id: "5",
-            message: this._state.ProfilePage.inputPost,
-            likeCounts: 0
-         }
-          store._state.ProfilePage.PostsData.push(newPost);
-          store._state.ProfilePage.inputPost = '';
-          store._state.ProfilePage._callSubscriber(store);
-        },
-      handleInputPost (event)  {
-        store._state.ProfilePage.inputPost = event.currentTarget.value;
-        store._state.ProfilePage._callSubscriber(store);
-      },
       PostsData: [
         { id: "1", message: "Hi,how are you?", likeCounts: "13" },
         { id: "2", message: "It's my first post!", likeCounts: "8" },
@@ -40,22 +22,6 @@ export let store = {
     },
     MessagesPage: {
       inputMessage: '',
-      
-      handleInputMessage  (event) {
-        store._state.MessagesPage.inputMessage = event.currentTarget.value;
-        store._state.ProfilePage._callSubscriber(store);
-      },
-      addMessage  ()  {
-        let newMessage = {
-          id: "5",
-          message: store._state.MessagesPage.inputMessage,
-          likeCounts: 0
-        }
-        store._state.MessagesPage.MessagesData.push(newMessage);
-        store._state.MessagesPage.inputMessage = '';
-    
-        store._state.ProfilePage._callSubscriber(store);
-      },
       MessagesData: [
         { id: "1", message: "Kogda trenya?", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%86%D0%B2%D0%B5%D1%82-_2014-03-15_18-16.jpg/220px-%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%86%D0%B2%D0%B5%D1%82-_2014-03-15_18-16.jpg" },
         { id: "2", message: "Pognali hockey smotret", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%86%D0%B2%D0%B5%D1%82-_2014-03-15_18-16.jpg/220px-%D0%A1%D0%B5%D1%80%D1%8B%D0%B9_%D1%86%D0%B2%D0%B5%D1%82-_2014-03-15_18-16.jpg" },
@@ -69,20 +35,30 @@ export let store = {
         { id: "3", message: "Mozhno u tebya lentu vzyat?)))" },
       ],
     },
-       },
-      dispatch(action){
-        if (action.type === 'ADD-POST'){
-        let newPost = {
-          id: "5",
-            message: this._state.ProfilePage.inputPost,
-            likeCounts: 0
-         }
-          store._state.ProfilePage.PostsData.push(newPost);
-          store._state.ProfilePage.inputPost = '';
-          store._state.ProfilePage._callSubscriber(store);
-        }
-      }
-        }    
+    dispatch(action) {
+      this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
+      dialogsReducer(this._state, action)
+      sidebarReducer(this._state, action)  
+      this._state._callSubscriber(this._state)
+      },
+      _callSubscriber() {
+     
+        console.log('State changed')
+      },
+      getState() {
+        console.log(this._state);
+        debugger
+        return this._state
+      },
+      subscribe(observer) {   
+      
+        this._callSubscriber = observer;
+      },
+  },
+  
+
+  }
+
 
 
 
