@@ -3,6 +3,12 @@ import MyPosts from './MyPosts';
 import { addPostActionCreator, handleInputPostActionCreator } from '../../../../Redux/Reducers/profile-Reducer';
 import { connect } from 'react-redux';
 
+let mapStateToProps = (state) => {
+  return {
+    postsData: state.profileReducer.postsData
+  }
+}
+
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: () => {
@@ -13,12 +19,7 @@ let mapDispatchToProps = (dispatch) => {
     },
   }
 }
-let mapStateToProps = (state) => {
-  return {
-    postsData: state.profileReducer.postsData
-  }
-}
 
-const MyPostsContainer = connect(mapDispatchToProps, mapStateToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer;
