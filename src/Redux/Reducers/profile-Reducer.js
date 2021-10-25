@@ -8,6 +8,7 @@ let initialState = {
   ],
 }
 const profileReducer = (state = initialState, action) => {
+  debugger
   switch (action.type) {
     case ADD_POST:
       let newPost = {
@@ -15,20 +16,23 @@ const profileReducer = (state = initialState, action) => {
         message: state.inputPost,
         likeCounts: 0
       }
-      state.postsData.push(newPost);
-      state.inputPost = '';
+      return {
+        ...state,
+        postsData: [...state.postsData, newPost],
+        inputPost: ''
+      }
 
-      break
     case HANDLE_INPUT_POST:
-      state.inputPost = action.event.currentTarget.value;
-
-      break
-
+      return {
+        ...state,
+        inputPost: action.value
+      }
+      
     default: return state
   }
 }
 export const handleInputPostActionCreator = (event) => {
-  return { type: HANDLE_INPUT_POST, event: event }
+  return { type: HANDLE_INPUT_POST, value: event.currentTarget.value }
 }
 export const addPostActionCreator = () => ({
   type: ADD_POST

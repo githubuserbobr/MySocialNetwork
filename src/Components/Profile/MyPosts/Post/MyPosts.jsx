@@ -12,14 +12,13 @@ const MyPosts = (props) => {
       </div>
       <div>
         <div>
-          <input value={props.inputPost} onChange={props.newMessage} placeholder='write something' />
+          <input value={props.inputPost} onChange={(event) => props.newMessage(event)} placeholder='write something' />
         </div>
         <div>
-          <button onClick={props.addPost} >Add post</button>
+          <button onClick={() => props.addPost()} >Add post</button>
         </div>
       </div>
       <div className={c.posts} />
-      
     </div>)
 };
 export default MyPosts;
