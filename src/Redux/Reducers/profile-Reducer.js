@@ -8,26 +8,26 @@ let initialState = {
   ],
 }
 const profileReducer = (state = initialState, action) => {
-  debugger
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST:{
       let newPost = {
         id: "5",
         message: state.inputPost,
-        likeCounts: 0
+        likeCounts: 0,
       }
       return {
         ...state,
-        postsData: [...state.postsData, newPost],
-        inputPost: ''
+      postsData: [...state.postsData, newPost],
+      inputPost: ''
       }
+    }
 
-    case HANDLE_INPUT_POST:
+    case HANDLE_INPUT_POST:{
       return {
         ...state,
         inputPost: action.value
       }
-      
+    }
     default: return state
   }
 }

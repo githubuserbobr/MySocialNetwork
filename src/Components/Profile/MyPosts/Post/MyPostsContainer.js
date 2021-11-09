@@ -3,6 +3,7 @@ import { addPostActionCreator, handleInputPostActionCreator } from '../../../../
 import { connect } from 'react-redux';
 
 let mapStateToProps = (state) => {
+  debugger
   return {
     postsData: state.profilePage.postsData,
     inputPost: state.profilePage.inputPost

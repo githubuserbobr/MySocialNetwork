@@ -1,6 +1,6 @@
 import React from 'react';
 import c from './Navbar.module.css';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = (props) => {
     return (
@@ -23,8 +23,9 @@ const Navbar = (props) => {
             <div className={`${c.item} ${c.friends}`}>
                 <NavLink to='/friends' activeClassName={c.activeLink}> Friends </NavLink>
             </div>
-            {/*<div className={c.friends}>{props.friendsName.map(item => <div className={c.friend}><img*/}
-            {/*    src={item.img}/><span>{item.name}</span></div>)}</div>*/}
+            <div className={`${c.item} `}>
+                <NavLink to='/users' activeClassName={c.activeLink}> Users  </NavLink>
+            </div>
         </nav>
     )
 }

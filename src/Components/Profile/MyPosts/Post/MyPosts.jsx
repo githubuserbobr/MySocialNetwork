@@ -3,7 +3,6 @@ import c from './MyPosts.module.css';
 import Post from '../Post';
 
 const MyPosts = (props) => {
-  debugger
   return (
     <div className={c.postsBlock}>
       {props.postsData.map(posts => (<Post message={posts.message} likeCounts={posts.likeCounts} id={posts.id} />))}

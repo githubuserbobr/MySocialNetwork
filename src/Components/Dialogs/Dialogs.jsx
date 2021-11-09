@@ -8,7 +8,7 @@ const Dialogs = (props) => {
     return (
         <div className={c.dialogs}>
             <div className={c.dialogsItems}>
-                {props.dialogs.map(dialogs => (<DialogItem name={dialogs.name} id={dialogs.id} img={dialogs.img}/>))}
+                {props.dialogs.map(dialogs => (<DialogItem key={dialogs.id} name={dialogs.name} id={dialogs.id} img={dialogs.img}/>))}
             </div>
             <div className={c.messages}>
                 {props.messages.map((item, index) => (
