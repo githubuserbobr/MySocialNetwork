@@ -1,3 +1,11 @@
 .descriptionBlock{
   padding: 10px;
 }
+.lookingJobImg{
+  width: 130px;  
+  height: 130px;
+  margin-top: 10px;
+}
+.ContactsWrapper{
+  margin-top: 15px;
+}
