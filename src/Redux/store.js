@@ -46,8 +46,6 @@ import profileReducer from "./Reducers/profile-Reducer";
         console.log('State changed')
       },
       getState() {
-        console.log(this._state);
-        debugger
         return this._state
       },
       subscribe(observer) {   

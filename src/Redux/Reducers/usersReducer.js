@@ -56,8 +56,6 @@ const usersReducer = (state = initialState, action) => {
         isFetching: action.isFetching,
       };
     case TOGGLE_FOLLOWING_PROCESS:
-      console.log(state.followingProcess)
-      debugger
       return {
         ...state,
         followingProcess: action.isFetching,

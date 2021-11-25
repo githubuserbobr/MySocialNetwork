@@ -40,7 +40,6 @@ class UsersAPIComponent extends React.Component {
       });
   };
   render() {
-
     return (
       <>
         {this.props.isFetching && <Loader />}
@@ -60,6 +59,7 @@ class UsersAPIComponent extends React.Component {
     );
   }
 }
+
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
