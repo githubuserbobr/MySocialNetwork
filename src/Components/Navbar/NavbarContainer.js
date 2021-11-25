@@ -1,22 +1,15 @@
-
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 import Users from "./Users";
 
-
 let mapStateToProps = (state) => {
-    debugger
-    return {
-        navbar: state.messagesPage.messagesData
-    }
-}
+  return {
+    navbar: state.messagesPage.messagesData,
+  };
+};
 
 let mapDispatchToProps = () => {
-    return {
-    
-    }
-        
-    }
-
+  return {};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

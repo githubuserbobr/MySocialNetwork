@@ -4,12 +4,14 @@ export const SET_USERS = "SET_USERS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+export const TOGGLE_FOLLOWING_PROCESS = "TOGGLE_FOLLOWING_PROCESS";
 let initialState = {
   users: [],
-  pageSize: 20,
+  pageSize: 5,
   totalUsersCount: 101,
   currentPage: 1,
   isFetching: false,
+  followingProcess: false,
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -53,6 +55,13 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching,
       };
+    case TOGGLE_FOLLOWING_PROCESS:
+      console.log(state.followingProcess)
+      debugger
+      return {
+        ...state,
+        followingProcess: action.isFetching,
+      };
 
     default:
       return state;
@@ -76,5 +85,8 @@ export const setTotalUsersCount = (totalUsersCount) => {
 };
 export const toggleIsFetching = (isFetching) => {
   return { type: TOGGLE_IS_FETCHING, isFetching };
+};
+export const toggleFollowingProcess = (isFetching) => {
+  return { type: TOGGLE_FOLLOWING_PROCESS, isFetching };
 };
 export default usersReducer;

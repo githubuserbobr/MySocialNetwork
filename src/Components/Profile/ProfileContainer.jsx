@@ -10,11 +10,13 @@ class ProfileContainer extends React.Component {
     super(props);
   }
   componentDidMount() {
-    let UserId = this.props.match.params.userId
- 
+    let userId = this.props.match.params.userId;
+    if (!userId) {
+      userId = 2;
+    }
     toggleIsFetching(true);
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + UserId)
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
 
       .then((response) => {
         toggleIsFetching(false);
@@ -34,5 +36,7 @@ let mapStateToProps = (state) => {
     profile: state.profilePage.profile,
   };
 };
-let WithRouterDataComponent = withRouter(ProfileContainer)
-export default connect(mapStateToProps, { setProfileUser })(WithRouterDataComponent);
+let WithRouterDataComponent = withRouter(ProfileContainer);
+export default connect(mapStateToProps, { setProfileUser })(
+  WithRouterDataComponent
+);

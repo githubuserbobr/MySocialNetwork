@@ -6,44 +6,41 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
+  toggleFollowingProcess
 } from "../../Redux/Reducers/usersReducer";
 import Users from "./Users";
-import axios from "axios";
+import { usersApi } from "../../api/api";
 import React from "react";
 import Loader from "../../assets/Loader";
+
 class UsersAPIComponent extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-
-      .then((response) => {
+    usersApi
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
   onPageChanged = (pages) => {
     this.props.setCurrentPage(pages);
     this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pages}&count=${this.props.pageSize}`
-      )
+    usersApi
+      .getUsers(pages, this.props.pageSize)
 
-      .then((response) => {
+      .then((data) => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   };
   render() {
-    console.log(this.props.isFetching);
+
     return (
       <>
         {this.props.isFetching && <Loader />}
@@ -55,6 +52,9 @@ class UsersAPIComponent extends React.Component {
           follow={this.props.follow}
           un_follow={this.props.un_follow}
           onPageChanged={this.onPageChanged}
+          isFetching={this.props.isFetching}
+          followingProcess={this.props.followingProcess}
+          toggleFollowingProcess={this.props.toggleFollowingProcess}
         />
       </>
     );
@@ -67,6 +67,7 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingProcess: state.usersPage.followingProcess
   };
 };
 
@@ -77,4 +78,5 @@ export default connect(mapStateToProps, {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
+  toggleFollowingProcess
 })(UsersAPIComponent);

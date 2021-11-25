@@ -5,3 +5,13 @@
 .header img {
 width: 40px;
 }
+.link a {
+    float: right;
+    color: black;
+    font-size: large;
+    text-decoration: none;
+}
+.link {
+    float: right; 
+    font-size: large;
+}

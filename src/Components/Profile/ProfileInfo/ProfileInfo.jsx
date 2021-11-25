@@ -1,10 +1,9 @@
 import React from "react";
 import c from "./ProfileInfo.module.css";
 import Loader from "./../../../assets/Loader";
-import No from "./../../../assets/images/No.jpeg"
-import Yes from "./../../../assets/images/Yes.png"
+import No from "./../../../assets/images/No.jpeg";
+import Yes from "./../../../assets/images/Yes.png";
 const ProfileInfo = (props) => {
-  debugger;
   if (!props.profile) {
     return <Loader />;
   }
@@ -18,11 +17,15 @@ const ProfileInfo = (props) => {
       </div>
       <div className={c.descriptionBlock}>
         <img src={props.profile.photos.large} alt="" />
-        <div>Name: {props.profile.fullName != null  ? props.profile.fullName : "none"}</div>
-      <div>AboutMe: {props.profile.aboutMe != null ? props.profile.aboutMe : "none"}</div>
-      <div>
-        
-      </div>
+        <div>
+          Name:{" "}
+          {props.profile.fullName != null ? props.profile.fullName : "none"}
+        </div>
+        <div>
+          AboutMe:{" "}
+          {props.profile.aboutMe != null ? props.profile.aboutMe : "none"}
+        </div>
+        <div></div>
         <div className={c.ContactsWrapper}>
           Contacts:
           <div>
@@ -63,14 +66,17 @@ const ProfileInfo = (props) => {
               : "none"}
           </div>
           <div>
-          lookingForAJobDescription:{" "}
-            {props.profile.lookingForAJobDescription != null 
+            lookingForAJobDescription:{" "}
+            {props.profile.lookingForAJobDescription != null
               ? props.profile.lookingForAJobDescription
               : "none"}
           </div>
           <div className={c.lookingJob}>
-          lookingForAJob:{" "}
-            <img className={c.lookingJobImg} src={props.profile.lookingForAJob  ? Yes : No }  />
+            lookingForAJob:{" "}
+            <img
+              className={c.lookingJobImg}
+              src={props.profile.lookingForAJob ? Yes : No}
+            />
           </div>
         </div>
       </div>
