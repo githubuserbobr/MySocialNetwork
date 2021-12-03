@@ -3,18 +3,19 @@ import c from "./ProfileInfo.module.css";
 import Loader from "./../../../assets/Loader";
 import No from "./../../../assets/images/No.jpeg";
 import Yes from "./../../../assets/images/Yes.png";
+import ProfileStatus from "./ProfileStatus";
 const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Loader />;
   }
   return (
     <div className={c.wrapper}>
-      <div>
+      {/* <div>
         <img
           className={c.mainImg}
           src="https://ewscripps.brightspotcdn.com/dims4/default/2792cfe/2147483647/strip/true/crop/3000x1688+0+0/resize/1280x720!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2F72%2F5e%2Ffcdc659144968e16bc45d33a8b92%2Fgettyimages-518785696.jpg"
         />
-      </div>
+      </div> */}
       <div className={c.descriptionBlock}>
         <img src={props.profile.photos.large} alt="" />
         <div>
@@ -80,6 +81,7 @@ const ProfileInfo = (props) => {
           </div>
         </div>
       </div>
+      <ProfileStatus status={'memento mori'}/>
     </div>
   );
 };

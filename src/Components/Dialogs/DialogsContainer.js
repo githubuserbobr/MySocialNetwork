@@ -1,9 +1,11 @@
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
 import {
-  addMessageActionCreator,
-  handleInputMessageActionCreator,
+  addMessage,
+  handleInputMessage,
 } from "../../Redux/Reducers/dialogs-Reducer";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 let mapStateToProps = (state) => {
   return {
@@ -13,15 +15,7 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    addMessage: () => {
-      dispatch(addMessageActionCreator());
-    },
-    handleInput: (value) => {
-      dispatch(handleInputMessageActionCreator(value));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export default compose(
+  connect(mapStateToProps, { addMessage, handleInputMessage }),
+  withAuthRedirect
+)(Dialogs);

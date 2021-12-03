@@ -11,16 +11,15 @@ export const usersApi = {
       .then((response) => response.data);
   },
   usersFollow(id) {
-    return instance
-      .post(`follow/${id}`)
+    return instance.post(`follow/${id}`);
   },
   usersUn_follow(id) {
-    return instance
-      .delete(`follow/${id}`)
+    return instance.delete(`follow/${id}`);
   },
-  getLogin(){
-    return instance 
-    .get(`auth/me`)
-    .then((response) => response.data)
+  getLogin() {
+    return instance.get(`auth/me`).then((response) => response.data);
+  },
+  getProfile(id) {
+    return instance.get(`profile/` + id);
   },
 };

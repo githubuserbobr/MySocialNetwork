@@ -59,11 +59,11 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const handleInputMessageActionCreator = (event) => {
+export const handleInputMessage = (event) => {
     return {type: HANDLE_INPUT_MESSAGE, value: event.currentTarget.value}
 }
 
-export const addMessageActionCreator = () => ({
+export const addMessage = () => ({
     type: ADD_MESSAGE
 })
 

@@ -1,3 +1,5 @@
+import { usersApi } from "../../api/api";
+
 export const FOLLOW = "FOLLOW";
 export const UN_FOLLOW = "UN_FOLLOW";
 export const SET_USERS = "SET_USERS";
@@ -11,7 +13,7 @@ let initialState = {
   totalUsersCount: 101,
   currentPage: 1,
   isFetching: false,
-  followingProcess: false,
+  followingProcess: [],
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,8 +21,9 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: state.users.map((u) => {
+          debugger;
           if (u.id === action.userid) {
-            return { ...u, followed: false };
+            return { ...u, followed: true };
           }
           return u;
         }),
@@ -30,7 +33,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         users: state.users.map((u) => {
           if (u.id === action.userid) {
-            return { ...u, followed: true };
+            return { ...u, followed: false };
           }
           return u;
         }),
@@ -51,24 +54,30 @@ const usersReducer = (state = initialState, action) => {
         totalUsersCount: action.totalUsersCount,
       };
     case TOGGLE_IS_FETCHING:
+      debugger;
       return {
         ...state,
         isFetching: action.isFetching,
       };
+
     case TOGGLE_FOLLOWING_PROCESS:
+      debugger;
       return {
         ...state,
-        followingProcess: action.isFetching,
+        followingProcess: action.isFetching
+          ? [...state.followingProcess, action.id]
+          : state.followingProcess.filter((id) => id != action.id),
       };
 
     default:
       return state;
   }
 };
-export const follow = (userid) => {
+export const followSuccess = (userid) => {
+  debugger;
   return { type: FOLLOW, userid };
 };
-export const un_follow = (userid) => ({
+export const un_followSuccess = (userid) => ({
   type: UN_FOLLOW,
   userid,
 });
@@ -84,7 +93,44 @@ export const setTotalUsersCount = (totalUsersCount) => {
 export const toggleIsFetching = (isFetching) => {
   return { type: TOGGLE_IS_FETCHING, isFetching };
 };
-export const toggleFollowingProcess = (isFetching) => {
-  return { type: TOGGLE_FOLLOWING_PROCESS, isFetching };
+export const toggleFollowingProcess = (isFetching, id) => {
+  debugger;
+  return { type: TOGGLE_FOLLOWING_PROCESS, isFetching, id };
+};
+export const getUsers = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersApi.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+    });
+  };
+};
+export const follow = (id) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProcess(true, id));
+    usersApi
+      .usersFollow(id)
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          dispatch(followSuccess(id));
+        }
+      })
+      .then(() => dispatch(toggleFollowingProcess(false, id)));
+  };
+};
+export const un_follow = (id) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProcess(true, id));
+    usersApi
+      .usersUn_follow(id)
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          dispatch(un_followSuccess(id));
+        }
+      })
+      .then(() => dispatch(toggleFollowingProcess(false, id)));
+  };
 };
 export default usersReducer;

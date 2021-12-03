@@ -6,39 +6,27 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
-  toggleFollowingProcess
+  toggleFollowingProcess,
+  getUsers,
 } from "../../Redux/Reducers/usersReducer";
 import Users from "./Users";
-import { usersApi } from "../../api/api";
 import React from "react";
 import Loader from "../../assets/Loader";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class UsersAPIComponent extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    usersApi
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
   onPageChanged = (pages) => {
     this.props.setCurrentPage(pages);
-    this.props.toggleIsFetching(true);
-    usersApi
-      .getUsers(pages, this.props.pageSize)
-
-      .then((data) => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      });
+    this.props.getUsers(pages, this.props.pageSize);
   };
+
   render() {
     return (
       <>
@@ -59,7 +47,7 @@ class UsersAPIComponent extends React.Component {
     );
   }
 }
-
+ withAuthRedirect(UsersAPIComponent);
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -67,16 +55,17 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
-    followingProcess: state.usersPage.followingProcess
+    followingProcess: state.usersPage.followingProcess,
   };
 };
 
-export default connect(mapStateToProps, {
+export default compose( connect(mapStateToProps, {
   follow,
   un_follow,
   setUsers,
   setCurrentPage,
   setTotalUsersCount,
   toggleIsFetching,
-  toggleFollowingProcess
-})(UsersAPIComponent);
+  toggleFollowingProcess,
+  getUsers,
+}),withAuthRedirect) (UsersAPIComponent);
